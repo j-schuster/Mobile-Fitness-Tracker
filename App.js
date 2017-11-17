@@ -1,13 +1,11 @@
 import React from 'react'
 import AddEntry from './components/AddEntry'
-import { View,
-         Text,
-         StyleSheet,
-         TouchableHighlight,
-         TouchableNativeFeedback,
-         TouchableWithoutFeedback,
-         Slider
-          } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+import { connect } from 'react-redux'
+import { addEntry } from './actions'
 
 export default class App extends React.Component {
   state = {
@@ -16,10 +14,11 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-
+      <Provider store={createStore(reducer)}>
+      <View style={{flex: 1}}>
         <AddEntry/>
       </View>
+      </Provider>
     )
   }
 }
@@ -32,6 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 })
+
 
 /*
 <Text>
